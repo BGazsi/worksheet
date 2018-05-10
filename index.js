@@ -5,8 +5,9 @@ const express = require('express'),
   User = require('./models/users'),
   bodyParser = require('body-parser')
 
+require('dotenv').config()
 mongoose.Promise = global.Promise
-mongoose.connect('mongodb://localhost/WorksheetDb')
+mongoose.connect(process.env.DB_HOST)
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
