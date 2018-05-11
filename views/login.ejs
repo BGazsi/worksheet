@@ -1,4 +1,4 @@
-<form action="/login" method="post">
+<form action="/user/login" method="post">
     <input type="text" id="username" name="username">
     <input type="password" id="password" name="password">
     <input type="submit">
@@ -6,4 +6,4 @@
 
 <a href="/user/register">Regisztráció</a>
 
-<%= tpl %>
+<%= error || '' %>

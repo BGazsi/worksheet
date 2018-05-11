@@ -10,7 +10,7 @@ const { hashPassword } = require('./utils')
 
 const userSchema = new Schema({
   role: {
-    type: String,
+    type: Number,
     required: true
   },
   email: {
@@ -49,7 +49,7 @@ const userSchema = new Schema({
   }
 });
 
-Schema.methods = {
+userSchema.methods = {
   isSamePassword (password) {
     return hashPassword(password, process.env.PW_SALT) === this.password
   }

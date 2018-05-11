@@ -3,7 +3,8 @@ const express = require('express'),
   port = process.env.PORT || 3000,
   mongoose = require('mongoose'),
   User = require('./models/users'),
-  bodyParser = require('body-parser')
+  bodyParser = require('body-parser'),
+  session = require('express-session');
 
 require('dotenv').config()
 mongoose.Promise = global.Promise
@@ -14,13 +15,12 @@ app.use(bodyParser.json())
 
 app.set('view engine', 'ejs')
 
-app.use(function (req, res, next) {
-
-  res.tpl = {}
-  res.tpl.error = []
-
-  return next()
-})
+app.use(session({
+  name : 'sessionID',
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true
+}));
 
 const routeHome = require('./routes/home')
 const routeUser = require('./routes/user')

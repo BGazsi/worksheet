@@ -11,5 +11,5 @@ module.exports = function(app) {
     .get(hasPermissionMW(constants.ROLE_USER), user.list_users)
 
   app.route('/home')
-    .get(user.list_users)
+    .get(hasPermissionMW(constants.ROLE_USER), home.render_home)
 }

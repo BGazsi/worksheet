@@ -6,8 +6,9 @@ exports.hashPassword = password => {
   return hash.digest('hex')
 }
 
-exports.getDefaultRenderObject = () => {
+exports.getDefaultRenderObject = (req, res) => {
   return {
+    user: req.session.user || '',
     error: []
   }
 }
