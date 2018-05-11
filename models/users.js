@@ -10,7 +10,7 @@ const { hashPassword } = require('./utils')
 
 const userSchema = new Schema({
   role: {
-    type: Number,
+    type: String,
     required: true
   },
   email: {

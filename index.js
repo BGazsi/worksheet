@@ -12,19 +12,18 @@ mongoose.connect(process.env.DB_HOST)
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-app.set('view engine', 'ejs');
-
-const routes = require('./routes/home')
-routes(app)
+app.set('view engine', 'ejs')
 
 app.use(function (req, res, next) {
 
-  res.tpl = {};
-  res.tpl.error = [];
+  res.tpl = {}
+  res.tpl.error = []
 
-  return next();
-});
+  return next()
+})
 
+const routes = require('./routes/home')
+routes(app)
 
 app.use((req, res) => {
   res.status(404).send({url: req.originalUrl + ' not found'})
