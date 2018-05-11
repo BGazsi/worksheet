@@ -15,4 +15,7 @@ module.exports = function(app) {
 
   app.route('/user/list')
     .get(user.list_users)
+
+  app.route('/user/logout')
+    .get(user.logout)
 }

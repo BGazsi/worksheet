@@ -67,3 +67,8 @@ exports.list_users = (req, res) => {
     })
   })
 }
+
+exports.logout = (req, res) => {
+  delete req.session.user
+  res.redirect('/')
+}
