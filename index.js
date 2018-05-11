@@ -22,8 +22,11 @@ app.use(function (req, res, next) {
   return next()
 })
 
-const routes = require('./routes/home')
-routes(app)
+const routeHome = require('./routes/home')
+const routeUser = require('./routes/user')
+
+routeHome(app)
+routeUser(app)
 
 app.use((req, res) => {
   res.status(404).send({url: req.originalUrl + ' not found'})

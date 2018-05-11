@@ -5,3 +5,9 @@ exports.hashPassword = password => {
   hash.update(password)
   return hash.digest('hex')
 }
+
+exports.getDefaultRenderObject = () => {
+  return {
+    error: []
+  }
+}

@@ -10,12 +10,6 @@ module.exports = function(app) {
   app.route('/')
     .get(hasPermissionMW(constants.ROLE_USER), user.list_users)
 
-  app.route('/user/create')
-    .post(user.create_user)
-
   app.route('/home')
     .get(user.list_users)
-
-  app.route('/login')
-    .get(home.login)
 }
