@@ -72,3 +72,50 @@ exports.logout = (req, res) => {
   delete req.session.user
   res.redirect('/')
 }
+
+exports.delete = (req, res) => {
+  User.findOneAndRemove({
+    _id: req.params['id']
+  }, (err, user) => {
+    if (err) {
+      return res.status(500).send(err)
+    }
+    return res.status(200).send({removedUser: user})
+  })
+}
+
+exports.edit_form = (req, res) => {
+  User.findOne({
+    _id: req.params['id']
+  }, (err, user) => {
+    if (err) {
+      return res.status(500).send(err)
+    }
+    return res.render('userEdit', {
+      user: req.session.user,
+      editUser: user
+    })
+  })
+}
+
+exports.edit = (req, res) => {
+  User.findOneAndUpdate({
+    _id: req.params['id']
+  }, {
+    $set: {
+      name: req.body.name,
+      email: req.body.email,
+      company: req.body.company,
+      phone: req.body.phone,
+      role: req.body.role
+    }
+  }, {
+    runValidators: true,
+    new: true
+  }, (err, user) => {
+    if (err) {
+      return res.status(500).send(err)
+    }
+    return res.redirect('/user/list')
+  })
+}

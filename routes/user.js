@@ -18,4 +18,11 @@ module.exports = function(app) {
 
   app.route('/user/logout')
     .get(user.logout)
+
+  app.route('/user/edit/:id')
+    .get(user.edit_form)
+    .post(user.edit)
+
+  app.route('/user/delete/:id')
+    .get(user.delete)
 }

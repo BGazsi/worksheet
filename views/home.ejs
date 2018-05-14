@@ -1,2 +1,6 @@
 <%= user ? 'Hello ' + user.name + '!' : '' %>
 <a href="/user/logout">Kilépés</a>
+
+<%if (user && user.role <= 2) {%>
+<a href="/user/list">Felhasználók listázása</a>
+<%}%>
