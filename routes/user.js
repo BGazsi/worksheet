@@ -14,15 +14,15 @@ module.exports = function(app) {
     .post(user.login)
 
   app.route('/user/list')
-    .get(user.list_users)
+    .get(hasPermissionMW(constants.ROLE_BOSS), user.list_users)
 
   app.route('/user/logout')
     .get(user.logout)
 
   app.route('/user/edit/:id')
-    .get(user.edit_form)
-    .post(user.edit)
+    .get(hasPermissionMW(constants.ROLE_BOSS), user.edit_form)
+    .post(hasPermissionMW(constants.ROLE_BOSS), user.edit)
 
   app.route('/user/delete/:id')
-    .get(user.delete)
+    .get(hasPermissionMW(constants.ROLE_BOSS), user.delete)
 }
