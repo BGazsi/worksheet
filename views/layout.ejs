@@ -5,12 +5,13 @@
   </head>
   <body>
     <header>
+      <%- defineContent('header') %>
     </header>
-    <section>
-    layout
-      <%-body -%>
+    <section class="container">
+      <%- body %>
     </section>
     <footer>
+      <%- defineContent('footer') %>
     </footer>
   </body>
 </html>
