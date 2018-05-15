@@ -155,7 +155,6 @@ exports.forgot = (req, res) => {
     },
     (token, user, done) => {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-      console.log(req.headers.host)
       let msg = {
         to: user.email,
         from: 'noreply@worksheet.com',
@@ -205,7 +204,6 @@ exports.do_reset = (req, res) => {
     },
     (user, done) => {
       sgMail.setApiKey(process.env.SENDGRID_API_KEY)
-      console.log(req.headers.host)
       let msg = {
         to: user.email,
         from: 'noreply@worksheet.com',
@@ -216,7 +214,7 @@ exports.do_reset = (req, res) => {
     }
   ], err => {
     if (err) {
-      res.set(500).render('reset', {error: err})
+      res.status(500).render('reset', {error: err})
     }
     res.redirect('/home')
   })
