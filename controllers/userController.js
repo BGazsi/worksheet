@@ -1,9 +1,12 @@
 'use strict'
 
-const mongoose = require('mongoose'),
-  User = mongoose.model('Users')
+const mongoose = require('mongoose')
+const User = mongoose.model('Users')
 const { hashPassword } = require('../models/utils')
 const { getDefaultRenderObject } = require('../models/utils')
+const async = require('async')
+const sgMail = require('@sendgrid/mail')
+const crypto = require('crypto')
 
 exports.render_login = (req, res) => {
   if (req.session && req.session.user) {
@@ -24,7 +27,7 @@ exports.login = (req, res) => {
       return
     }
     if (user && user.isSamePassword(req.body.password)) {
-      req.session.user = user;
+      req.session.user = user
       res.redirect('/home')
     } else if (user) {
       res.render('login', {error: 'Nem megfelelő jelszó'})
@@ -117,5 +120,104 @@ exports.edit = (req, res) => {
       return res.status(500).send(err)
     }
     return res.redirect('/user/list')
+  })
+}
+
+exports.forgot_form = (req, res) => {
+  if (req.session.user) {
+    return res.redirect('/home')
+  }
+  return res.render('forgot', getDefaultRenderObject(req, res))
+}
+
+exports.forgot = (req, res) => {
+  async.waterfall([
+    done => {
+      crypto.randomBytes(20, function(err, buf) {
+        let token = buf.toString('hex')
+        done(err, token)
+      })
+    },
+    (token, done) => {
+      User.findOneAndUpdate({ email: req.body.email }, {
+        $set: {
+          resetPasswordToken: token,
+          resetPasswordExpires: Date.now() + 48 * 3600 * 1000
+        }
+      }, {
+        new: true
+      }, (err, user) => {
+        if (err) {
+          return res.status(500).render('forgot', {error: err})
+        }
+        done(err, token, user)
+      })
+    },
+    (token, user, done) => {
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+      console.log(req.headers.host)
+      let msg = {
+        to: user.email,
+        from: 'noreply@worksheet.com',
+        subject: 'Elfelejtett jelszó',
+        html: '<strong>Itt igényelhetsz új jelszót:</strong><a href="http://'+req.headers.host+'/user/reset/'+token+'">Új jelszó kérése</a>'
+      }
+      sgMail.send(msg).then(() => {done(undefined)}).catch(err => {done(err)})
+    }
+  ], err => {
+    if (err) {
+      return res.status(500).render('forgot', {error: err})
+    }
+    return res.redirect('/user/forgot')
+  })
+}
+
+exports.reset = (req, res) => {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
+    if (!user) {
+      return res.render('reset', {error: 'A megadott URL nem érvényes!'})
+    }
+    return res.render('reset', {user:   user})
+  })
+}
+
+exports.do_reset = (req, res) => {
+  async.waterfall([
+    done => {
+      User.findOneAndUpdate({
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { $gt: Date.now()}
+        },
+        {
+        $set: {
+          resetPasswordToken: undefined,
+          resetPasswordExpires: undefined,
+          password: hashPassword(req.body.password)
+        }
+      }, {
+        new: true
+      }, (err, user) => {
+        if (!user) {
+          return res.render('reset', {error: 'A megadott URL nem érvényes!'})
+        }
+        done(err, user)
+      })
+    },
+    (user, done) => {
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+      console.log(req.headers.host)
+      let msg = {
+        to: user.email,
+        from: 'noreply@worksheet.com',
+        subject: 'Sikeres jelszóváltoztatás',
+        html: 'A jelszó sikeresen megváltozott.'
+      }
+      sgMail.send(msg).then(() => {done(undefined)}).catch(err => {done(err)})
+    }
+  ], err => {
+    if (err) {
+      res.set(500).render('reset', {error: err})
+    }
+    res.redirect('/home')
   })
 }

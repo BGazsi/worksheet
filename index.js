@@ -4,7 +4,10 @@ const express = require('express'),
   mongoose = require('mongoose'),
   User = require('./models/users'),
   bodyParser = require('body-parser'),
-  session = require('express-session');
+  session = require('express-session'),
+  sgMail = require('@sendgrid/mail')
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 require('dotenv').config()
 mongoose.Promise = global.Promise
@@ -20,7 +23,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true
-}));
+}))
 
 const routeHome = require('./routes/home')
 const routeUser = require('./routes/user')

@@ -1,12 +1,6 @@
-const mongoose = require('mongoose'),
-  Schema = mongoose.Schema,
-  autoIncrement = require('mongoose-auto-increment');
-
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 const { hashPassword } = require('./utils')
-
-// const connection = mongoose.createConnection("mongodb://localhost/WorksheetDb");
-
-// autoIncrement.initialize(connection);
 
 const userSchema = new Schema({
   role: {
@@ -44,20 +38,18 @@ const userSchema = new Schema({
     required: true,
     default: true
   },
-  forgotten_pwd: {
-    type: Date,
+  resetPasswordToken: {
+    type: String
+  },
+  resetPasswordExpires: {
+    type: Date
   }
-});
+})
 
 userSchema.methods = {
   isSamePassword (password) {
     return hashPassword(password, process.env.PW_SALT) === this.password
   }
 }
-
-// userSchema.plugin(autoIncrement.plugin, 'Users');
-// const Users = connection.model('Users', userSchema);
-
-// module.exports = Users;
 
 module.exports = mongoose.model('Users', userSchema)

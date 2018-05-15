@@ -24,13 +24,13 @@
     "nodemon": "^1.17.3"
   },
   "dependencies": {
+    "@sendgrid/mail": "^6.2.1",
+    "async": "^2.6.0",
     "body-parser": "^1.18.2",
-    "bootstrap": "^4.1.1",
     "dotenv": "^5.0.1",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
-    "mongoose": "^5.0.17",
-    "mongoose-auto-increment": "^5.0.1"
+    "mongoose": "^5.0.17"
   }
 }

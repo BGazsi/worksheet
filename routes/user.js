@@ -1,6 +1,6 @@
 'use strict'
 const hasPermissionMW = require('../middlewares/hasPermission')
-const constants = require('../config/constants');
+const constants = require('../config/constants')
 
 module.exports = function(app) {
   let user = require('../controllers/userController')
@@ -25,4 +25,12 @@ module.exports = function(app) {
 
   app.route('/user/delete/:id')
     .get(hasPermissionMW(constants.ROLE_BOSS), user.delete)
+
+  app.route('/user/forgot')
+    .get(user.forgot_form)
+    .post(user.forgot)
+
+  app.route('/user/reset/:token')
+    .get(user.reset)
+    .post(user.do_reset)
 }
