@@ -4,6 +4,7 @@ const express = require('express'),
   mongoose = require('mongoose'),
   User = require('./models/users'),
   bodyParser = require('body-parser'),
+  expressLayouts = require('express-ejs-layouts'),
   session = require('express-session'),
   sgMail = require('@sendgrid/mail')
 
@@ -17,6 +18,11 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.set('view engine', 'ejs')
+
+app.use(expressLayouts);
+app.set('layout', 'layout');
+
+app.use(express.static('public/dist'));
 
 app.use(session({
   name : 'sessionID',
