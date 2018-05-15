@@ -1,28 +1,35 @@
-Felhasználók
-<table>
-    <thead>
-    <tr>
-        <th>Név</th>
-        <th>Szerepkör</th>
-        <th>Telefonszám</th>
-        <th>E-mail</th>
-        <th>Létrehozás dátuma</th>
-        <th>Akciók</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% users.forEach(function(user) { %>
-    <tr>
-        <td><%= user.name %></td>
-        <td><%= user.role %></td>
-        <td><%= user.phone %></td>
-        <td><%= user.email %></td>
-        <td><%= user.created_date %></td>
-        <td>
-            <a href="/user/edit/<%= user._id %>">Szerkesztés</a>
-            <a href="/user/delete/<%= user._id %>">Törlés</a>
-        </td>
-    </tr>
-    <% }) %>
-    </tbody>
-</table>
+<%- contentFor('header') %>
+<%- include partials/header.ejs %>
+
+<%- contentFor('body') %>
+<div class="card mt-5">
+    <div class="card-body">
+        <table class="table table-bordered table-hover table-responsive">
+            <thead>
+            <tr>
+                <th>Név</th>
+                <th>Szerepkör</th>
+                <th>Telefonszám</th>
+                <th>E-mail</th>
+                <th>Létrehozás dátuma</th>
+                <th>Akciók</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% users.forEach(function(user) { %>
+            <tr>
+                <td><%= user.name %></td>
+                <td><%= user.role %></td>
+                <td><%= user.phone %></td>
+                <td><%= user.email %></td>
+                <td><%= user.created_date %></td>
+                <td>
+                    <a href="/user/edit/<%= user._id %>">Szerkesztés</a>
+                    <a href="/user/delete/<%= user._id %>">Törlés</a>
+                </td>
+            </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
