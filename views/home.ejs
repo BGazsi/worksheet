@@ -4,3 +4,7 @@
 <%if (user && user.role <= 2) {%>
 <a href="/user/list">Felhasználók listázása</a>
 <%}%>
+
+<%if (user) {%>
+<a href="/order/create">Megrendelés létrehozása</a>
+<%}%>

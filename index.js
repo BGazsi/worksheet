@@ -3,6 +3,7 @@ const express = require('express'),
   port = process.env.PORT || 8080,
   mongoose = require('mongoose'),
   User = require('./models/users'),
+  Order = require('./models/orders'),
   bodyParser = require('body-parser'),
   expressLayouts = require('express-ejs-layouts'),
   session = require('express-session'),
@@ -33,9 +34,11 @@ app.use(session({
 
 const routeHome = require('./routes/home')
 const routeUser = require('./routes/user')
+const routeOrder = require('./routes/order')
 
 routeHome(app)
 routeUser(app)
+routeOrder(app)
 
 app.use((req, res) => {
   res.status(404).send({url: req.originalUrl + ' not found'})

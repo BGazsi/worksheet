@@ -1,0 +1,13 @@
+<form action="/order/create" method="post">
+    <input type="text" id="orderNumber" name="orderNumber" placeholder="orderNumber">
+    <input type="date" id="deadline" name="deadline" placeholder="deadline">
+    <input type="text" id="textOnItem" name="textOnItem" placeholder="textOnItem">
+    <label for="sampleNeeded">samleNeeded</label>
+    <input type="checkbox" id="sampleNeeded" name="sampleNeeded">
+    <label for="scrapReplacementNeeded">scrapReplacementNeeded</label>
+    <input type="checkbox" id="scrapReplacementNeeded" name="scrapReplacementNeeded">
+    <textarea name="otherNote" id="otherNote" cols="30" rows="10"></textarea>
+    <textarea name="privateNote" id="privateNote" cols="30" rows="10"></textarea>
+    <input type="submit">
+</form>
+<%= error ? error : '' %>

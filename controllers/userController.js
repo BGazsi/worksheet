@@ -161,7 +161,7 @@ exports.forgot = (req, res) => {
         subject: 'Elfelejtett jelszó',
         html: '<strong>Itt igényelhetsz új jelszót:</strong><a href="http://'+req.headers.host+'/user/reset/'+token+'">Új jelszó kérése</a>'
       }
-      sgMail.send(msg).then(() => {done(undefined)}).catch(err => {done(err)})
+      sgMail.send(msg).then(() => {done()}).catch(err => {done(err)})
     }
   ], err => {
     if (err) {
@@ -210,7 +210,7 @@ exports.do_reset = (req, res) => {
         subject: 'Sikeres jelszóváltoztatás',
         html: 'A jelszó sikeresen megváltozott.'
       }
-      sgMail.send(msg).then(() => {done(undefined)}).catch(err => {done(err)})
+      sgMail.send(msg).then(() => {done()}).catch(err => {done(err)})
     }
   ], err => {
     if (err) {

@@ -1,0 +1,34 @@
+<%- contentFor('header') %>
+<%- include partials/header.ejs %>
+
+<%- contentFor('body') %>
+<div class="card mt-5">
+    <div class="card-body">
+        <table class="table table-bordered table-hover table-responsive">
+            <thead>
+            <tr>
+                <th>orderNumber</th>
+                <th>sampleNeeded</th>
+                <th>scrapReplacementNeeded</th>
+                <th>deadline</th>
+                <th>createdDate</th>
+                <th>Akciók</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% orders.forEach(function(order) { %>
+            <tr>
+                <td><%= order.orderNumber %></td>
+                <td><%= order.sampleNeeded %></td>
+                <td><%= order.scrapReplacementNeeded %></td>
+                <td><%= order.deadline %></td>
+                <td><%= order.createdDate %></td>
+                <td>
+
+                </td>
+            </tr>
+            <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
