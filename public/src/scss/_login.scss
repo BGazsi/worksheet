@@ -1,0 +1,35 @@
+.login-box {
+  @extend .card;
+
+  width: 350px;
+  border-top: 5px solid #4d7496;
+
+  &__title {
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 25px;
+  }
+
+  &__body {
+    @extend .card-body;
+  }
+
+  &__footer {
+    @extend .card-footer;
+
+    background-color: #f9f9f9;
+    border-top: 1px solid #c0c0c0;
+    text-align: center;
+  }
+
+  &__button {
+    @extend .btn, .btn-primary;
+  }
+
+  &__link {
+    color: #555;
+    font-size: 12px;
+    font-weight: 600;
+    display: block;
+  }
+}

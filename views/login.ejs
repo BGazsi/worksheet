@@ -1,31 +1,22 @@
 <%- contentFor('body') %>
-<div class="row justify-content-center mt-5">
-    <div class="col-lg-4">
-        <div class="card">
-            <div class="card-body">
-                <p class="text-center">Bejelentkezés</p>
-                <form action="/user/login" method="post">
-                    <div class="form-group">
-                        <input type="email" id="username" name="username" class="form-control" placeholder="E-mail cím">
-                    </div>
-                    <div class="form-group">
-                        <input type="password"  id="password" name="password" class="form-control" placeholder="Jelszó">
-                    </div>
-
-                    <p class="text-danger"> <%= error || '' %></p>
-
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">Bejelentkezés</button>
-                    </div>
-                </form>
-
-                <p class="mt-4 mb-0 text-center">
-                    <a href="/user/forgot">Elfelejtetted a jelszavadat?</a>
-                </p>
-                <p class="mb-0 text-center">
-                    <a href="/user/register" class="text-center">Még nem regisztráltál?</a>
-                </p>
+<div class="login-box">
+    <div class="login-box__body">
+        <h3 class="login-box__title">Bejelentkezés</h3>
+        <form action="/user/login" method="post">
+            <div class="form-group">
+                <input type="email" id="username" name="username" class="form-control" placeholder="E-mail cím">
             </div>
-        </div>
+            <div class="form-group">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Jelszó">
+            </div>
+
+            <p class="text-danger"> <%= error || '' %></p>
+
+            <button type="submit" class="login-box__button">Bejelentkezés</button>
+        </form>
+    </div>
+    <div class="login-box__footer">
+        <a href="/user/forgot" class="login-box__link">Elfelejtetted a jelszavadat?</a>
+        <a href="/user/register" class="login-box__link">Még nem regisztráltál?</a>
     </div>
 </div>
