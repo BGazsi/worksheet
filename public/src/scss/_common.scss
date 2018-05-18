@@ -1,3 +1,7 @@
+.container {
+  @extend .d-flex, .justify-content-center, .mt-5;
+}
+
 .form-control {
   padding-left: 30px!important;
   border-left: 2px solid #4d7496;
