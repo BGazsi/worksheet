@@ -1,32 +1,32 @@
 <%- contentFor('body') %>
-<div class="login-box">
-    <div class="login-box__body">
-        <h3 class="login-box__title">Regisztráció</h3>
+<div class="login-box box">
+    <div class="box__body">
+        <h3 class="box__title">Regisztráció</h3>
 
         <form action="/user/register" method="post">
             <div class="form-group">
-                <input type="text" id="company" name="company" class="form-control" placeholder="Megrendelő neve">
+                <input type="text" id="company" name="company" class="form-control" placeholder="Megrendelő neve" required>
             </div>
             <div class="form-group">
-                <input type="text" id="name" name="name" class="form-control" placeholder="Kapcsolattartó neve">
+                <input type="text" id="name" name="name" class="form-control" placeholder="Kapcsolattartó neve" required>
             </div>
             <div class="form-group">
-                <input type="text" id="phone" name="phone" class="form-control" placeholder="Telefonszám">
+                <input type="text" id="phone" name="phone" class="form-control" placeholder="Telefonszám" required>
             </div>
             <div class="form-group">
-                <input type="email" id="email" name="email" class="form-control" placeholder="E-mail cím">
+                <input type="email" id="email" name="email" class="form-control" placeholder="E-mail cím" required>
             </div>
             <div class="form-group">
-                <input type="password" id="password" name="password" class="form-control" placeholder="Jelszó">
+                <input type="password" id="password" name="password" class="form-control" placeholder="Jelszó" required>
             </div>
 
             <p class="text-danger"> <%= error || '' %></p>
 
-            <button type="submit" class="login-box__button">Regisztráció</button>
+            <button type="submit" class="box__button">Regisztráció</button>
         </form>
     </div>
-    <div class="login-box__footer">
-        <a href="/user/forgot" class="login-box__link">Elfelejtetted a jelszavadat?</a>
-        <a href="/user/login" class="login-box__link">Már regisztráltál? Itt be tudsz lépni!</a>
+    <div class="box__footer">
+        <a href="/user/forgot" class="box__link">Elfelejtetted a jelszavadat?</a>
+        <a href="/user/login" class="box__link">Már regisztráltál? Itt be tudsz lépni!</a>
     </div>
 </div>

@@ -1,4 +1,17 @@
-<form action="/user/forgot" method="post">
-    <input type="email" placeholder="email cim" id="email" name="email">
-    <input type="submit">
-</form>
+<%- contentFor('body') %>
+<div class="forgot-box box">
+    <div class="box__body">
+        <h3 class="box__title">Elfelejtett jelszó</h3>
+        <form action="/user/forgot" method="post">
+            <div class="form-group">
+                <input type="email" id="email" name="email" class="form-control" placeholder="E-mail cím" required>
+            </div>
+
+            <button type="submit" class="box__button">Mehet</button>
+        </form>
+    </div>
+    <div class="box__footer">
+        <a href="/user/login" class="box__link">Vissza a bejelentkezéshez!</a>
+        <a href="/user/register" class="box__link">Még nem regisztráltál?</a>
+    </div>
+</div>
