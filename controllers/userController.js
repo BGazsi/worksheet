@@ -66,6 +66,7 @@ exports.list_users = (req, res) => {
       res.send(err)
     }
     res.render('userList', {
+      user: req.session.user,
       users: result
     })
   })
