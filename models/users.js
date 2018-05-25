@@ -9,8 +9,8 @@ const userSchema = new Schema({
   },
   email: {
     type: String,
-    unique : true,
-    required : true,
+    unique: true,
+    required: true,
     dropDups: true
   },
   name: {

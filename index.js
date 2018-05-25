@@ -20,13 +20,13 @@ app.use(bodyParser.json())
 
 app.set('view engine', 'ejs')
 
-app.use(expressLayouts);
-app.set('layout', 'layout');
+app.use(expressLayouts)
+app.set('layout', 'layout')
 
-app.use(express.static('public/dist'));
+app.use(express.static('public/dist'))
 
 app.use(session({
-  name : 'sessionID',
+  name: 'sessionID',
   secret: process.env.SESSION_SECRET,
   resave: true,
   saveUninitialized: true

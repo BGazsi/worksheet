@@ -1,1 +1,1 @@
-setTimeout(() => { console.log("ES2015 FTW"); }, 1000);
+setTimeout(() => { console.log('ES2015 FTW') }, 1000)

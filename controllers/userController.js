@@ -134,7 +134,7 @@ exports.forgot_form = (req, res) => {
 exports.forgot = (req, res) => {
   async.waterfall([
     done => {
-      crypto.randomBytes(20, function(err, buf) {
+      crypto.randomBytes(20, function (err, buf) {
         let token = buf.toString('hex')
         done(err, token)
       })
@@ -160,9 +160,9 @@ exports.forgot = (req, res) => {
         to: user.email,
         from: 'noreply@worksheet.com',
         subject: 'Elfelejtett jelszó',
-        html: '<strong>Itt igényelhetsz új jelszót:</strong><a href="http://'+req.headers.host+'/user/reset/'+token+'">Új jelszó kérése</a>'
+        html: '<strong>Itt igényelhetsz új jelszót:</strong><a href="http://' + req.headers.host + '/user/reset/' + token + '">Új jelszó kérése</a>'
       }
-      sgMail.send(msg).then(() => {done()}).catch(err => {done(err)})
+      sgMail.send(msg).then(() => { done() }).catch(err => { done(err) })
     }
   ], err => {
     if (err) {
@@ -177,7 +177,7 @@ exports.reset = (req, res) => {
     if (!user) {
       return res.render('reset', {error: 'A megadott URL nem érvényes!'})
     }
-    return res.render('reset', {user:   user})
+    return res.render('reset', {user: user})
   })
 }
 
@@ -187,8 +187,8 @@ exports.do_reset = (req, res) => {
       User.findOneAndUpdate({
         resetPasswordToken: req.params.token,
         resetPasswordExpires: { $gt: Date.now()}
-        },
-        {
+      },
+      {
         $set: {
           resetPasswordToken: undefined,
           resetPasswordExpires: undefined,
@@ -211,7 +211,7 @@ exports.do_reset = (req, res) => {
         subject: 'Sikeres jelszóváltoztatás',
         html: 'A jelszó sikeresen megváltozott.'
       }
-      sgMail.send(msg).then(() => {done()}).catch(err => {done(err)})
+      sgMail.send(msg).then(() => { done() }).catch(err => { done(err) })
     }
   ], err => {
     if (err) {
