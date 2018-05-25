@@ -1,7 +1,7 @@
-var gulp = require('gulp'),
-  rename = require('gulp-rename'),
-  sass = require('gulp-sass'),
-  babel = require('gulp-babel')
+const gulp = require('gulp')
+const rename = require('gulp-rename')
+const sass = require('gulp-sass')
+const babel = require('gulp-babel')
 
 gulp.task('scss', function () {
   return gulp.src('./public/src/scss/**/init.scss')

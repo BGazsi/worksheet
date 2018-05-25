@@ -1,13 +1,13 @@
-const express = require('express'),
-  app = express(),
-  port = process.env.PORT || 8080,
-  mongoose = require('mongoose'),
-  User = require('./models/users'),
-  Order = require('./models/orders'),
-  bodyParser = require('body-parser'),
-  expressLayouts = require('express-ejs-layouts'),
-  session = require('express-session'),
-  sgMail = require('@sendgrid/mail')
+const express = require('express')
+const app = express()
+const port = process.env.PORT || 8080
+const mongoose = require('mongoose')
+const User = require('./models/users')
+const Order = require('./models/orders')
+const bodyParser = require('body-parser')
+const expressLayouts = require('express-ejs-layouts')
+const session = require('express-session')
+const sgMail = require('@sendgrid/mail')
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 

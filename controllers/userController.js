@@ -43,8 +43,8 @@ exports.create_user = (req, res) => {
   newUserObject.role = 10
   newUserObject.enabled = true
   newUserObject.created_date = new Date()
-  let new_user = new User(newUserObject)
-  new_user.save((err, user) => {
+  let newUser = new User(newUserObject)
+  newUser.save((err) => {
     if (err) {
       res.render('register', {error: err})
       return
@@ -80,7 +80,7 @@ exports.logout = (req, res) => {
 exports.delete = (req, res) => {
   User.findOneAndRemove({
     _id: req.params['id']
-  }, (err, user) => {
+  }, (err) => {
     if (err) {
       return res.status(500).send(err)
     }
@@ -116,7 +116,7 @@ exports.edit = (req, res) => {
   }, {
     runValidators: true,
     new: true
-  }, (err, user) => {
+  }, (err) => {
     if (err) {
       return res.status(500).send(err)
     }
@@ -174,7 +174,7 @@ exports.forgot = (req, res) => {
 
 exports.reset = (req, res) => {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, (err, user) => {
-    if (!user) {
+    if (!user || err) {
       return res.render('reset', {error: 'A megadott URL nem érvényes!'})
     }
     return res.render('reset', {user: user})
@@ -186,7 +186,7 @@ exports.do_reset = (req, res) => {
     done => {
       User.findOneAndUpdate({
         resetPasswordToken: req.params.token,
-        resetPasswordExpires: { $gt: Date.now()}
+        resetPasswordExpires: {$gt: Date.now()}
       },
       {
         $set: {

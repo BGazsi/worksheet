@@ -3,7 +3,6 @@
 const mongoose = require('mongoose')
 const Order = mongoose.model('Orders')
 const { getDefaultRenderObject } = require('../models/utils')
-const async = require('async')
 
 exports.render_new_order = (req, res) => {
   return res.render('newOrder', getDefaultRenderObject(req, res))
@@ -17,8 +16,8 @@ exports.create_order = (req, res) => {
   newOrderObject.sampleNeeded = !!req.body.sampleNeeded
   newOrderObject.scrapReplacementNeeded = !!req.body.scrapReplacementNeeded
   newOrderObject.orderItems = []
-  let new_order = new Order(newOrderObject)
-  new_order.save((err, order) => {
+  let newOrder = new Order(newOrderObject)
+  newOrder.save((err) => {
     if (err) {
       res.render('newOrder', {error: err})
       return
