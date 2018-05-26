@@ -4,6 +4,7 @@ const port = process.env.PORT || 8080
 const mongoose = require('mongoose')
 const User = require('./models/users')
 const Order = require('./models/orders')
+const OrderItem = require('./models/orderItems')
 const bodyParser = require('body-parser')
 const expressLayouts = require('express-ejs-layouts')
 const session = require('express-session')

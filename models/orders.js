@@ -21,10 +21,7 @@ const OrderSchema = new Schema({
   },
   otherNote: String,
   privateNote: String,
-  orderItems: {
-    type: Array,
-    default: []
-  },
+  orderItemIds: [String],
   status: {
     type: Number,
     default: 1
