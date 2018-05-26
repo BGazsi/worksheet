@@ -7,6 +7,10 @@ const OrderSchema = new Schema({
     type: Date,
     required: true
   },
+  user: {
+    type: String,
+    required: true
+  },
   textOnItem: {
     type: String,
     required: true

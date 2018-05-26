@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose')
 const Order = mongoose.model('Orders')
+const constants = require('../config/constants')
 const OrderItem = mongoose.model('OrderItems')
 const { getDefaultRenderObject } = require('../models/utils')
 
@@ -14,10 +15,10 @@ exports.create_order = (req, res) => {
   newOrderObject.createdDate = new Date()
   newOrderObject.status = 1
   newOrderObject.deadline = new Date(req.body.deadline)
+  newOrderObject.user = req.session.user._id
   newOrderObject.sampleNeeded = !!req.body.sampleNeeded
   newOrderObject.scrapReplacementNeeded = !!req.body.scrapReplacementNeeded
   newOrderObject.orderItemIds = createOrderItems(req.body.orderItems || [])
-  console.log(newOrderObject)
   let newOrder = new Order(newOrderObject)
   newOrder.save((err) => {
     if (err) {
@@ -29,6 +30,18 @@ exports.create_order = (req, res) => {
 }
 
 exports.list_orders = (req, res) => {
+  if (req.session.user.role > constants.ROLE_GRAPHIC) {
+    Order.find({
+      user: req.session.user._id
+    }, (err, result) => {
+      if (err) {
+        res.send(err)
+      }
+      res.render('orderList', {
+        orders: result
+      })
+    })
+  }
   Order.find({}, (err, result) => {
     if (err) {
       res.send(err)
