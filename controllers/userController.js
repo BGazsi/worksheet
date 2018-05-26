@@ -23,7 +23,9 @@ exports.login = (req, res) => {
     email: req.body.username
   }, (err, user) => {
     if (err) {
-      res.render('login', {error: err})
+      res.render('login', {
+        error: err
+      })
       return
     }
     if (user && user.isSamePassword(req.body.password)) {

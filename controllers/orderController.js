@@ -22,7 +22,10 @@ exports.create_order = (req, res) => {
   let newOrder = new Order(newOrderObject)
   newOrder.save((err) => {
     if (err) {
-      res.render('newOrder', {error: err})
+      res.render('newOrder', {
+        error: err,
+        user: req.session.user
+      })
       return
     }
     res.redirect('/order/list')
@@ -38,7 +41,8 @@ exports.list_orders = (req, res) => {
         res.send(err)
       }
       res.render('orderList', {
-        orders: result
+        orders: result,
+        user: req.session.user
       })
     })
   }
@@ -47,7 +51,8 @@ exports.list_orders = (req, res) => {
       res.send(err)
     }
     res.render('orderList', {
-      orders: result
+      orders: result,
+      user: req.session.user
     })
   })
 }
