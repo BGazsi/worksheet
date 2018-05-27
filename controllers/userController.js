@@ -30,7 +30,7 @@ exports.login = (req, res) => {
     }
     if (user && user.isSamePassword(req.body.password)) {
       req.session.user = user
-      res.redirect('/home')
+      res.redirect('/')
     } else if (user) {
       res.render('login', {error: 'Nem megfelelő jelszó'})
     } else {
@@ -57,7 +57,7 @@ exports.create_user = (req, res) => {
 
 exports.register = (req, res) => {
   if (req.session && req.session.user) {
-    res.redirect('/home')
+    res.redirect('/')
   }
   res.render('register', getDefaultRenderObject(req, res))
 }
@@ -128,7 +128,7 @@ exports.edit = (req, res) => {
 
 exports.forgot_form = (req, res) => {
   if (req.session.user) {
-    return res.redirect('/home')
+    return res.redirect('/')
   }
   return res.render('forgot', getDefaultRenderObject(req, res))
 }
@@ -219,6 +219,6 @@ exports.do_reset = (req, res) => {
     if (err) {
       res.status(500).render('reset', {error: err})
     }
-    res.redirect('/home')
+    res.redirect('/')
   })
 }
