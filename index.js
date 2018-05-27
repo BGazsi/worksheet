@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const User = require('./models/users')
 const Order = require('./models/orders')
 const OrderItem = require('./models/orderItems')
-const bodyParser = require('body-parser')
+const bb = require('express-busboy')
 const expressLayouts = require('express-ejs-layouts')
 const session = require('express-session')
 const sgMail = require('@sendgrid/mail')
@@ -16,8 +16,9 @@ require('dotenv').config()
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.DB_HOST)
 
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+bb.extend(app, {
+  upload: true
+})
 
 app.set('view engine', 'ejs')
 
