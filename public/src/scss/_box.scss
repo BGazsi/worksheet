@@ -2,7 +2,7 @@
   @extend .card;
 
   width: 350px;
-  border-top: 5px solid #4d7496;
+  border-top: 5px solid $primary;
 
   &__title {
     text-align: center;
@@ -17,8 +17,7 @@
   &__footer {
     @extend .card-footer;
 
-    background-color: #f9f9f9;
-    border-top: 1px solid #c0c0c0;
+    border-top: 1px solid $card-separate-color;
     text-align: center;
   }
 
@@ -27,7 +26,7 @@
   }
 
   &__link {
-    color: #555;
+    color: $link-color;
     font-size: 12px;
     font-weight: 600;
     display: block;
