@@ -1,31 +1,28 @@
 <%- contentFor('header') %>
 <%- include partials/header.ejs %>
 
+<%- contentFor('sidebar') %>
+<%- include partials/sidebar.ejs %>
+
 <%- contentFor('body') %>
-<div class="card mt-5">
+<div class="card">
     <div class="card-body">
         <table class="table table-bordered table-hover table-responsive">
             <thead>
             <tr>
-                <th>orderNumber</th>
-                <th>sampleNeeded</th>
-                <th>scrapReplacementNeeded</th>
-                <th>deadline</th>
-                <th>createdDate</th>
-                <th>Akciók</th>
+                <th>R.sz.</th>
+                <th>Megrendelő</th>
+                <th>Leírás</th>
+                <th>Határidő</th>
             </tr>
             </thead>
             <tbody>
             <% orders.forEach(function(order) { %>
             <tr>
                 <td><%= order.orderNumber %></td>
-                <td><%= order.sampleNeeded %></td>
-                <td><%= order.scrapReplacementNeeded %></td>
+                <td><%= order.user.name %></td>
+                <td><%= order.textOnItem %></td>
                 <td><%= order.deadline %></td>
-                <td><%= order.createdDate %></td>
-                <td>
-
-                </td>
             </tr>
             <% }) %>
             </tbody>

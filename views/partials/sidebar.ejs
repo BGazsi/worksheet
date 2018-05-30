@@ -1,0 +1,19 @@
+<aside class="sidebar">
+    <ul class="sidebar__nav nav">
+        <% if (user) { %>
+        <li class="nav__item">
+            <a href="/order/create" class="nav__link">Megrendelés létrehozása</a>
+        </li>
+        <% } %>
+
+        <li class="nav__item">
+            <a href="/order/list" class="nav__link">Megrendelések listázása</a>
+        </li>
+
+        <% if (user && user.role <= 2) { %>
+        <li class="nav__item">
+            <a href="/user/list" class="nav__link">Felhasználók listázása</a>
+        </li>
+        <% } %>
+    </ul>
+</aside>
