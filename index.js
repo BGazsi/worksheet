@@ -1,6 +1,5 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 8080
 const mongoose = require('mongoose')
 const User = require('./models/users')
 const Order = require('./models/orders')
@@ -15,6 +14,8 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 require('dotenv').config()
 mongoose.Promise = global.Promise
 mongoose.connect(process.env.DB_HOST)
+
+const port = process.env.PORT
 
 bb.extend(app, {
   upload: true
