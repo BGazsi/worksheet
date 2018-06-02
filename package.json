@@ -36,13 +36,14 @@
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-standard": "^3.1.0",
-    "gulp": "^3.9.1",
+    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-babel": "^7.0.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^4.0.1",
     "nodemon": "^1.17.3"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.1.8",
     "@sendgrid/mail": "^6.2.1",
     "async": "^2.6.0",
     "body-parser": "^1.18.2",

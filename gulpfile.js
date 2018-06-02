@@ -3,23 +3,32 @@ const rename = require('gulp-rename')
 const sass = require('gulp-sass')
 const babel = require('gulp-babel')
 
-gulp.task('scss', function () {
-  return gulp.src('./public/src/scss/**/init.scss')
-    .pipe(sass().on('error', sass.logError))
-    .pipe(rename('style.css'))
-    .pipe(gulp.dest('./public/dist/css/'))
-})
+function styles() {
+    return gulp.src('./public/src/scss/**/init.scss')
+        .pipe(sass()).on('error', sass.logError)
+        .pipe(rename({
+            basename: 'style'
+        }))
+        .pipe(gulp.dest('./public/dist/css/'))
+}
 
-gulp.task('js', function () {
-  return gulp.src('./public/src/js/**/*.js')
-    .pipe(babel())
-    .pipe(rename('script.js'))
-    .pipe(gulp.dest('./public/dist/js/'))
-})
+function scripts() {
+    return gulp.src('./public/src/js/**/*.js')
+        .pipe(babel())
+        .pipe(rename({
+            basename: 'script'
+        }))
+        .pipe(gulp.dest('./public/dist/js/'))
+}
 
-gulp.task('watch', function () {
-  gulp.watch('./public/src/scss/**/*.scss', ['scss'])
-  gulp.watch('./public/src/js/**/*.js', ['js'])
-})
+function watch() {
+    gulp.watch('./public/src/scss/**/*.scss', styles)
+    gulp.watch('./public/src/js/**/*.js', scripts)
+}
 
-gulp.task('default', ['scss', 'js'])
+exports.scripts = scripts
+exports.watch = watch
+exports.styles = styles
+
+const build = gulp.series(gulp.parallel(styles, scripts));
+gulp.task('default', build);
