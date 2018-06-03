@@ -1,8 +1,30 @@
-<form action="/user/edit/<%=editUser._id%>" method="post">
-    <input type="email" name="email" id="email" value="<%=editUser.email%>">
-    <input type="text" name="name" id="name" value="<%=editUser.name%>">
-    <input type="text" name="company" id="company" value="<%=editUser.company%>">
-    <input type="text" name="phone" id="phone" value="<%=editUser.phone%>">
-    <input type="number" name="role" id="role" value="<%=editUser.role%>">
-    <input type="submit">
-</form>
+<%- contentFor('header') %>
+<%- include partials/header.ejs %>
+
+<%- contentFor('sidebar') %>
+<%- include partials/sidebar.ejs %>
+
+<%- contentFor('body') %>
+<div class="login-box box">
+    <div class="box__body">
+        <h3 class="box__title">Megrendelő szerkesztése</h3>
+        <form action="/user/edit/<%=editUser._id%>" method="post">
+            <div class="form-group">
+                <input type="email" name="email" id="email" value="<%=editUser.email%>" class="form-control" placeholder="E-mail cím" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="name" id="name" value="<%=editUser.name%>" class="form-control" placeholder="Kapcsolattartó neve" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="company" id="company" value="<%=editUser.company%>" class="form-control" placeholder="Megrendelő" required>
+            </div>
+            <div class="form-group">
+                <input type="text" name="phone" id="phone" value="<%=editUser.phone%>" class="form-control" placeholder="Telefonszám" required>
+            </div>
+
+            <input type="hidden" name="role" id="role" value="<%=editUser.role%>">
+
+            <button type="submit" class="box__button">Mentés</button>
+        </form>
+    </div>
+</div>

@@ -1,20 +1,59 @@
-<form action="/order/create" method="post" encType="multipart/form-data">
-    <input type="text" id="orderNumber" name="orderNumber" placeholder="orderNumber">
-    <input type="date" id="deadline" name="deadline" placeholder="deadline">
-    <input type="text" id="textOnItem" name="textOnItem" placeholder="textOnItem">
-    <label for="sampleNeeded">samleNeeded</label>
-    <input type="checkbox" id="sampleNeeded" name="sampleNeeded">
-    <label for="scrapReplacementNeeded">scrapReplacementNeeded</label>
-    <input type="checkbox" id="scrapReplacementNeeded" name="scrapReplacementNeeded">
-    <textarea name="otherNote" id="otherNote" cols="30" rows="10"></textarea>
-    <textarea name="privateNote" id="privateNote" cols="30" rows="10"></textarea>
+<%- contentFor('header') %>
+<%- include partials/header.ejs %>
 
-    <input type="text" id="orderItemProduct" name="orderItems[0][product]">
-    <input type="text" id="orderItemQuantity" name="orderItems[0][quantity]">
-    <input type="text" id="orderItemNumberOfColors" name="orderItems[0][numberOfColors]">
-    <input type="text" id="orderItempantoneColors" name="orderItems[0][pantoneColors]">
-    <input type="text" id="orderItemPlacement" name="orderItems[0][placement]">
-    <input type="file" id="orderItemPictures" name="orderItems[0][pictures]" accept="image/*" multiple>
-    <input type="submit">
-</form>
-<%= error ? error : '' %>
+<%- contentFor('sidebar') %>
+<%- include partials/sidebar.ejs %>
+
+<%- contentFor('body') %>
+<div class="login-box box">
+    <div class="box__body">
+        <h3 class="box__title">Új megrendelés</h3>
+        <form action="/order/create" method="post" encType="multipart/form-data">
+            <div class="form-group">
+                <input type="text" id="orderNumber" name="orderNumber" class="form-control" placeholder="Megrendelés szám" required>
+            </div>
+            <div class="form-group">
+                <input type="date" id="deadline" name="deadline" class="form-control" placeholder="Határidő" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="textOnItem" name="textOnItem" class="form-control" placeholder="Leírás" required>
+            </div>
+            <div class="form-group">
+                <label for="sampleNeeded">Mintadarab</label>
+                <input type="checkbox" id="sampleNeeded" name="sampleNeeded" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="scrapReplacementNeeded">Selejtpótlás</label>
+                <input type="checkbox" id="scrapReplacementNeeded" name="scrapReplacementNeeded" class="form-control">
+            </div>
+            <div class="form-group">
+                <textarea name="otherNote" id="otherNote" cols="30" rows="5" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <textarea name="privateNote" id="privateNote" cols="30" rows="5" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <input type="text" id="orderItemProduct" name="orderItems[0][product]" class="form-control" placeholder="Termék" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="orderItemQuantity" name="orderItems[0][quantity]" class="form-control" placeholder="Darabszám" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="orderItemNumberOfColors" name="orderItems[0][numberOfColors]" class="form-control" placeholder="Színek száma" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="orderItempantoneColors" name="orderItems[0][pantoneColors]" class="form-control" placeholder="Szín" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="orderItemPlacement" name="orderItems[0][placement]" class="form-control" placeholder="Elhelyezés" required>
+            </div>
+            <div class="form-group">
+                <input type="file" id="orderItemPictures" name="orderItems[0][pictures]" accept="image/*" multiple  class="form-control">
+            </div>
+
+            <p class="text-danger"> <%= error || '' %></p>
+
+            <button type="submit" class="box__button">Mentés</button>
+        </form>
+    </div>
+</div>
