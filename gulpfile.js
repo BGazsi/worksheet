@@ -2,6 +2,7 @@ const gulp = require('gulp')
 const rename = require('gulp-rename')
 const sass = require('gulp-sass')
 const babel = require('gulp-babel')
+const concat = require('gulp-concat')
 
 function styles() {
     return gulp.src('./public/src/scss/**/init.scss')
@@ -14,11 +15,16 @@ function styles() {
 
 function scripts() {
     return gulp.src('./public/src/js/**/*.js')
-        .pipe(babel())
-        .pipe(rename({
-            basename: 'script'
-        }))
-        .pipe(gulp.dest('./public/dist/js/'))
+    .pipe(babel())
+    .pipe(rename({
+        basename: 'script'
+    }))
+    .pipe(gulp.dest('./public/dist/js/'))
+
+    //return gulp.src(['./node_modules/bootstrap/js/src/collapse.js', './public/src/js/**/*.js'])
+    //    .pipe(concat('script.js'))
+    //    .pipe(babel())
+    //    .pipe(gulp.dest('./public/dist/js/'))
 }
 
 function watch() {

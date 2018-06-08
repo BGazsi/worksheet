@@ -1,14 +1,19 @@
 <%- contentFor('body') %>
-ikon : <i class="fas fa-flag"></i>
 <div class="login-box box">
     <div class="box__body">
         <h3 class="box__title">Bejelentkezés</h3>
-        <form action="/user/login" method="post">
-            <div class="form-group">
-                <input type="email" id="username" name="username" class="form-control" placeholder="E-mail cím" required>
+        <form action="/user/login" method="post" class="box__form form">
+            <div class="form__element">
+                <svg class="form__icon">
+                    <use xlink:href="/svg/fa-solid.svg#at"></use>
+                </svg>
+                <input type="email" id="username" name="username" class="form__input" placeholder="E-mail cím" required>
             </div>
-            <div class="form-group">
-                <input type="password" id="password" name="password" class="form-control" placeholder="Jelszó" required>
+            <div class="form__element">
+                <svg class="form__icon">
+                    <use xlink:href="/svg/fa-solid.svg#key"></use>
+                </svg>
+                <input type="password" id="password" name="password" class="form__input" placeholder="Jelszó" required>
             </div>
 
             <p class="text-danger"> <%= error || '' %></p>

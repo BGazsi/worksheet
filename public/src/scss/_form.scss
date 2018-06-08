@@ -1,0 +1,23 @@
+.form {
+  &__element {
+    @extend .form-group;
+
+    position: relative;
+  }
+
+  &__input {
+    @extend .form-control;
+
+    padding-left: 30px;
+    border-left: 2px solid #4d7496;
+    font-size: $font-size-sm;
+  }
+
+  &__icon {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    top: 8px;
+    left: 8px;
+  }
+}
