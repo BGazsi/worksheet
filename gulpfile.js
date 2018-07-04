@@ -14,17 +14,19 @@ function styles() {
 }
 
 function scripts() {
-    return gulp.src('./public/src/js/**/*.js')
+    const jquery = './node_modules/jquery/dist/jquery.js'
+    const util = './node_modules/bootstrap/js/dist/util.js'
+    const modal = './node_modules/bootstrap/js/dist/modal.js'
+    const portalJs = './public/src/js/**/*.js'
+
+    return gulp.src([jquery, util, modal, portalJs])
+    .pipe(concat('script.js'))
     .pipe(babel())
     .pipe(rename({
-        basename: 'script'
+        basename: 'script',
+        extname: '.js'
     }))
     .pipe(gulp.dest('./public/dist/js/'))
-
-    //return gulp.src(['./node_modules/bootstrap/js/src/collapse.js', './public/src/js/**/*.js'])
-    //    .pipe(concat('script.js'))
-    //    .pipe(babel())
-    //    .pipe(gulp.dest('./public/dist/js/'))
 }
 
 function watch() {
