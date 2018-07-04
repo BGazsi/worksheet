@@ -15,11 +15,10 @@ function styles() {
 
 function scripts() {
     const jquery = './node_modules/jquery/dist/jquery.js'
-    const util = './node_modules/bootstrap/js/dist/util.js'
     const modal = './node_modules/bootstrap/js/dist/modal.js'
     const portalJs = './public/src/js/**/*.js'
 
-    return gulp.src([jquery, util, modal, portalJs])
+    return gulp.src([jquery, modal, portalJs])
     .pipe(concat('script.js'))
     .pipe(babel())
     .pipe(rename({
