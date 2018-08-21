@@ -1,16 +1,15 @@
 <%- contentFor('header') %>
 <%- include partials/header.ejs %>
-
 <%- contentFor('sidebar') %>
 <%- include partials/sidebar.ejs %>
-
 <%- contentFor('body') %>
-<div class="login-box box">
-    <div class="box__body">
-        <h3 class="box__title">Új megrendelés</h3>
-        <form action="/order/create" method="post" encType="multipart/form-data">
+<form action="/order/create" method="post" data-component="new-order-form" encType="multipart/form-data">
+    <div class="login-box box">
+        <div class="box__body">
+            <h3 class="box__title">Új megrendelés</h3>
             <div class="form__element">
-                <input type="text" id="orderNumber" name="orderNumber" class="form__input" placeholder="Megrendelés szám" required>
+                <input type="text" id="orderNumber" name="orderNumber" class="form__input"
+                       placeholder="Megrendelés szám" required>
             </div>
             <div class="form__element">
                 <input type="date" id="deadline" name="deadline" class="form__input" placeholder="Határidő" required>
@@ -32,28 +31,44 @@
             <div class="form__element">
                 <textarea name="privateNote" id="privateNote" cols="30" rows="5" class="form__input"></textarea>
             </div>
-            <div class="form__element">
-                <input type="text" id="orderItemProduct" name="orderItems[0][product]" class="form__input" placeholder="Termék" required>
-            </div>
-            <div class="form__element">
-                <input type="text" id="orderItemQuantity" name="orderItems[0][quantity]" class="form__input" placeholder="Darabszám" required>
-            </div>
-            <div class="form__element">
-                <input type="text" id="orderItemNumberOfColors" name="orderItems[0][numberOfColors]" class="form__input" placeholder="Színek száma" required>
-            </div>
-            <div class="form__element">
-                <input type="text" id="orderItempantoneColors" name="orderItems[0][pantoneColors]" class="form__input" placeholder="Szín" required>
-            </div>
-            <div class="form__element">
-                <input type="text" id="orderItemPlacement" name="orderItems[0][placement]" class="form__input" placeholder="Elhelyezés" required>
-            </div>
-            <div class="form__element">
-                <input type="file" id="orderItemPictures" name="orderItems[0][pictures]" accept="image/*" multiple  class="form__input">
-            </div>
-
-            <p class="text-danger"> <%= error || '' %></p>
-
-            <button type="submit" class="box__button">Mentés</button>
-        </form>
+        </div>
     </div>
-</div>
+
+    <div data-component="collection-wrapper">
+        <div class="login-box box" data-component="collection">
+            <div class="box__body">
+                <h3 class="box__title">Tétel</h3>
+                <div class="form__element">
+                    <input type="text" id="orderItemProduct" name="orderItems[IDX][product]" class="form__input"
+                           placeholder="Termék" required>
+                </div>
+                <div class="form__element">
+                    <input type="text" id="orderItemQuantity" name="orderItems[IDX][quantity]" class="form__input"
+                           placeholder="Darabszám" required>
+                </div>
+                <div class="form__element">
+                    <input type="text" id="orderItemNumberOfColors" name="orderItems[IDX][numberOfColors]"
+                           class="form__input" placeholder="Színek száma" required>
+                </div>
+                <div class="form__element">
+                    <input type="text" id="orderItempantoneColors" name="orderItems[IDX][pantoneColors]"
+                           class="form__input" placeholder="Szín" required>
+                </div>
+                <div class="form__element">
+                    <input type="text" id="orderItemPlacement" name="orderItems[IDX][placement]" class="form__input"
+                           placeholder="Elhelyezés" required>
+                </div>
+                <div class="form__element">
+                    <input type="file" id="orderItemPictures" name="orderItems[IDX][pictures]" accept="image/*" multiple
+                           class="form__input">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="box__button" data-component="new-collection">Új tétel hozzáadása</button>
+
+    <p class="text-danger"> <%= error || '' %></p>
+
+    <button type="submit" class="box__button">Mentés</button>
+</form>
