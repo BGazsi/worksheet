@@ -4,10 +4,14 @@ $('[data-toggle="modal"]').click(function (event) {
     $('#' + $(this).attr('data-target')).modal('show')
 });
 
-let gtmClick = function() {
+let gtmClick = function () {
     [...document.querySelectorAll('[data-component~="gtm-click"]')].map(element => {
         element.addEventListener('click', () => {
-            dataLayer.push(JSON.parse(element.getAttribute('data-gtm-click-options')));
+            try {
+                dataLayer.push(JSON.parse(element.getAttribute('data-gtm-click-options')));
+            } catch (e) {
+                console.error(e);
+            }
         })
     })
 };
